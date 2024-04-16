@@ -2,21 +2,25 @@ import pygame
 import random
 from time import sleep
 
+# Display setup
 pygame.init()
 screen = pygame.display.set_mode((1200, 900))
 clock = pygame.time.Clock()
 FPS = 60
 run = True
 
+# Basic setup
 pygame.display.set_caption("Pong")
 pygame.display.set_icon(pygame.image.load("icon.png"))
 font = pygame.font.SysFont("Ariel", 64)
 music = pygame.mixer.Sound("loop.mp3")
 explosion = pygame.mixer.Sound("explosion.wav")
 
+# Middle net
 def draw_net():
     pygame.draw.line(screen, (100, 100, 100), (600, 0), (600, 900), 2)
 
+# Score Renderer
 def score_display():
     player1_display = font.render(str(player1.score), True, "White")
     p1_score_pos = player1_display.get_rect(center = (300, 100))
@@ -25,6 +29,7 @@ def score_display():
     screen.blit(player1_display, p1_score_pos)
     screen.blit(player2_display, p2_score_pos)
 
+# Paddle Class
 class Paddle(pygame.sprite.Sprite):
     def __init__(self, color, initial_pos):
         super().__init__()
@@ -48,6 +53,7 @@ player1 = Paddle("Red", (22, 450))
 player2 = Paddle("Blue", (1178, 450))
 playerGroup = pygame.sprite.Group(player1, player2)
 
+# Ball Class
 class Ball(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -86,6 +92,7 @@ class Ball(pygame.sprite.Sprite):
 
 ball = Ball()
 
+# Game Loop
 while run:
     pygame.mixer.Sound.play(music, 1)
     screen.fill((50, 50, 50))
