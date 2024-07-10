@@ -6,7 +6,7 @@ from time import sleep
 pygame.init()
 screen = pygame.display.set_mode((1200, 900))
 clock = pygame.time.Clock()
-FPS = 60
+FPS = 100
 run = True
 
 # Basic setup
@@ -40,9 +40,9 @@ class Paddle(pygame.sprite.Sprite):
     def update(self, up, down):
         keys = pygame.key.get_pressed()
         if keys[up]:
-            self.rect.y -= 10
+            self.rect.y -= 6
         if keys[down]:
-            self.rect.y += 10
+            self.rect.y += 6
     def clamp(self):
         if self.rect.top <= 0:
             self.rect.top = 0
@@ -60,8 +60,8 @@ class Ball(pygame.sprite.Sprite):
         self.surface = pygame.Surface((24, 24))
         self.surface.set_colorkey("Black")
         self.rect = self.surface.get_rect(center = (600, 450))
-        self.velX = random.choice((-7, 7))
-        self.velY = random.randint(-10, 10)
+        self.velX = random.choice((-4, 4))
+        self.velY = random.randint(-6, 6)
     def update(self):
         pygame.draw.circle(self.surface, "White", (12, 12), 12)
         self.rect.x += self.velX
